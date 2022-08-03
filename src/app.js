@@ -6,3 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     <img src=${rainbow} />
 `;
 });
+
+console.log(process.env.NODE_ENV);
+console.log(TWO);
+console.log(two);
+console.log(api.domain);

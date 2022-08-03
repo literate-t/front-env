@@ -1,10 +1,8 @@
 const path = require('path');
-const fs = require('fs');
-const getFilesizeInBytes = (filename) => {
-  const stats = fs.statSync(filename);
-  const fileSizeInBytes = stats.size;
-  return fileSizeInBytes;
-};
+const webpack = require('webpack');
+const childProcess = require('child_process');
+
+const MyWebpackPlugin = require('./my-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
@@ -47,4 +45,19 @@ module.exports = {
       // },
     ],
   },
+  plugins: [
+    new MyWebpackPlugin(),
+    new webpack.BannerPlugin({
+      banner: `
+    BuildDate:${new Date().toLocaleString()}
+    Commit Version: ${childProcess.execSync('git rev-parse --short HEAD')}
+    User Name: ${childProcess.execSync('git config user.name')}
+    `,
+    }),
+    new webpack.DefinePlugin({
+      TWO: '1+1',
+      two: JSON.stringify('1+1'),
+      'api.domain': JSON.stringify('http://dev.api.domain.com'),
+    }),
+  ],
 };
