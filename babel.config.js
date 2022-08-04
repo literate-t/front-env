@@ -8,7 +8,9 @@ module.exports = {
           ie: '11',
         },
         useBuiltIns: 'usage',
-        corejs: {},
+        corejs: {
+          version: 3,
+        },
       },
     ],
   ],
