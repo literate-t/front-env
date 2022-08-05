@@ -1,3 +1,3 @@
-const alert = (msg) => window.alert(msg);
+var foo = "";
 
-new Promise();
+console.log();
