@@ -27,8 +27,10 @@
   "dependencies": {
     "@babel/cli": "^7.18.10",
     "@babel/core": "^7.18.10",
+    "axios": "^0.27.2",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.2.5",
+    "connect-api-mocker": "^1.10.0",
     "core-js": "^3.24.1",
     "css-loader": "^6.7.1",
     "eslint-plugin-prettier": "^4.2.1",

@@ -4,6 +4,7 @@ const childProcess = require('child_process');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const apiMocker = require('connect-api-mocker');
 
 module.exports = {
   mode: 'development',
@@ -91,33 +92,25 @@ module.exports = {
   ],
   devServer: {
     setupMiddlewares: (middleware, devServer) => {
-      // if (!devServer) {
-      //   throw new Error('webpack-dev-server is not define');
-      // }
-      // // mockup data 넣기
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not define');
+      }
+      // mockup data 넣기
+      devServer.app.use(apiMocker('/api', 'mocks/api'));
       // devServer.app.get('/api/users', (req, res) => {
-      //   res.send('setup-middlewares option GET');
-      //   res.end();
-      //   // res.json([
-      //   //   {
-      //   //     id: 1,
-      //   //     name: 'Alice',
-      //   //   },
-      //   //   {
-      //   //     id: 2,
-      //   //     name: 'Bek',
-      //   //   },
-      //   //   {
-      //   //     id: 3,
-      //   //     name: 'John',
-      //   //   },
-      //   // ]);
+
       // });
+      return middleware;
     },
     client: {
       overlay: true,
       logging: 'error',
       progress: true,
     },
+    // api 서버가 포트가 다른 경우 CORS가 되도록 프록시를 해야함
+    // proxy: {
+    //   '/api': 'http://localhost:8081',
+    // },
+    compress: true,
   },
 };
