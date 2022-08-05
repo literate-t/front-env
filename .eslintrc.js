@@ -4,13 +4,13 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["eslint:recommended", "eslint-config-prettier"],
+  extends: ['eslint:recommended', 'eslint-config-prettier'],
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ["prettier"],
+  plugins: ['prettier'],
   rules: {
-    "prettier/prettier": "error",
+    'prettier/prettier': 'error',
   },
 };
