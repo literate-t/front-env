@@ -5,9 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const apiMocker = require('connect-api-mocker');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  mode: 'development',
+  mode,
   entry: {
     main: './src/app.js',
   },
@@ -90,6 +93,13 @@ module.exports = {
       ? [new MiniCssExtractPlugin({ filename: '[name].css' })] // 이렇게 처리 안 하면 hash 값이 들어감
       : []), // 개발환경에선 굳이 안 해도 됨
   ],
+  optimization: {
+    minimizer: [
+      // `...`,
+      new CssMinimizerPlugin(),
+      new TerserPlugin(),
+    ],
+  },
   devServer: {
     setupMiddlewares: (middleware, devServer) => {
       if (!devServer) {
